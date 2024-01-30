@@ -1,10 +1,9 @@
-import DashboardHeaderComponent from "../shared/Dashboard.Header.Component";
+import DashboardHeader from "../components/dashboard/dashboard_header";
 
 const Dashboard = () => {
   return (
     <div>
-      <DashboardHeaderComponent />
-      <h1>Dashboard</h1>
+      <DashboardHeader />
     </div>
   );
 };
