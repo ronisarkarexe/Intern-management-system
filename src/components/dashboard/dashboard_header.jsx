@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useGetAllDepartmentsQuery } from "../../redux/features/department/departmentApi";
 
 const DashboardHeader = () => {
   const [departments, setDepartments] = useState([]);
-
+  const { data, isLoading } = useGetAllDepartmentsQuery(undefined);
   useEffect(() => {
-    fetch(`http://localhost:8000/api/v1/department`)
-      .then((response) => response.json())
-      .then((data) => {
-        setDepartments(data.data);
-      });
-  }, []);
+    if (data && Array.isArray(data.data)) {
+      setDepartments(data.data);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <div>Loading...!</div>;
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-5">
