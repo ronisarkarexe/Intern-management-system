@@ -1,4 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 
 const Layout = () => {
   return (
@@ -26,10 +27,30 @@ const Layout = () => {
             </Link>
           </li>
           <li>
+            <Link to="/add-department">
+              <a>Add Department</a>
+            </Link>
+          </li>
+          <li>
             <Link to="/admin">
               <a>Add Admin</a>
             </Link>
           </li>
+
+          <div className="mt-auto">
+            <div className="flex justify-evenly">
+              <div className="cursor-pointer">
+                <Link to="/user-profile">
+                  <CgProfile fontSize={40} />
+                </Link>
+              </div>
+              <div className="cursor-pointer">
+                <Link>
+                  <h3 className="text-2xl">LogOut</h3>
+                </Link>
+              </div>
+            </div>
+          </div>
         </ul>
       </div>
     </div>

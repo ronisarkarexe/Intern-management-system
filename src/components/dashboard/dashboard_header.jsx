@@ -1,48 +1,29 @@
+import { useState, useEffect } from "react";
+
 const DashboardHeader = () => {
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/api/v1/department`)
+      .then((response) => response.json())
+      .then((data) => {
+        setDepartments(data.data);
+      });
+  }, []);
+
   return (
-    <div className="flex flex-wrap justify-evenly m-5">
-      <div className="md:w-1/3 lg:w-1/4 bg-base-100 shadow-xl mb-4">
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title">5 Web Intern</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 m-5">
+      {departments.map((department) => (
+        <div key={department._id} className="mb-4">
+          <div className="bg-base-100 shadow-xl">
+            <div className="card">
+              <div className="card-body">
+                <h2 className="card-title">{`${department.internDetails.length} ${department.departmentName}`}</h2>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="md:w-1/3 lg:w-1/3 bg-base-100 shadow-xl mb-4">
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title">2 Finance Intern</h2>
-          </div>
-        </div>
-      </div>
-      <div className="md:w-1/3 lg:w-1/3 bg-base-100 shadow-xl mb-4">
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title">2 HR Intern</h2>
-          </div>
-        </div>
-      </div>
-      <div className="md:w-1/3 lg:w-1/4 bg-base-100 shadow-xl mb-4">
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title">6 Full Stack Intern</h2>
-          </div>
-        </div>
-      </div>
-      <div className="md:w-1/3 lg:w-1/3 bg-base-100 shadow-xl mb-4">
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title">3 Design Intern</h2>
-          </div>
-        </div>
-      </div>
-      <div className="md:w-1/3 lg:w-1/3 bg-base-100 shadow-xl mb-4">
-        <div className="card">
-          <div className="card-body">
-            <h2 className="card-title">4 Frontend Intern</h2>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
   );
 };
