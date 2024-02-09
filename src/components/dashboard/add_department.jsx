@@ -19,11 +19,17 @@ const AddDepartment = () => {
         <input
           type="text"
           placeholder="Name"
-          {...register("name", { ...register("name") })}
-          className="input input-bordered input-sm w-full max-w-xs mt-3"
-        />
-        {errors.name && <span>This field is required</span>}
-        <button type="submit">Save</button>
+          {...register("name", { required: true })}
+          className="input input-bordered input-sm w-full max-w-xs mt-4"
+        />{" "}
+        <br />
+        {errors.name && (
+          <span className="text-red-500 text-sm">This Name is required</span>
+        )}{" "}
+        <br />
+        <button type="submit" className="btn btn-sm btn-outline btn-success">
+          Save
+        </button>
       </form>
     </div>
   );

@@ -1,12 +1,11 @@
-import HomeComponent from "./pages/Home"
+import HomeComponent from "./pages/Home";
 
 function App() {
-
   return (
     <div>
-      <HomeComponent/>
+      <HomeComponent />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
