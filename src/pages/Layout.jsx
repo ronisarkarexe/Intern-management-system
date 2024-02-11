@@ -27,8 +27,8 @@ const Layout = () => {
             </Link>
           </li>
           <li>
-            <Link to="/add-department">
-              <a>Add Department</a>
+            <Link to="/department">
+              <a>Department</a>
             </Link>
           </li>
           <li>

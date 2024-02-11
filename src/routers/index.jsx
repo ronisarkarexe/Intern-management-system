@@ -3,7 +3,7 @@ import AddAdmin from "../pages/AddAdmin";
 import Dashboard from "../pages/Dashboard";
 import HomeLayout from "../pages/HomeLayout";
 import ProfileComponent from "../shared/Profile.Component";
-import AddDepartment from "../components/dashboard/add_department";
+import Department from "../components/department/department";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +15,8 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/add-department",
-        element: <AddDepartment />,
+        path: "/department",
+        element: <Department />,
       },
       {
         path: "/admin",

@@ -7,3 +7,8 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.drawer-content, .drawer-side {
+  max-height: 91vh;
+  overflow-y: auto;
+}
