@@ -1,10 +1,14 @@
-import DashboardHeader from "../components/dashboard/dashboard_header";
+import DepartmentAdminHeader from "../components/dashboard/dashboard_admin_header";
+import DashboardAdminList from "../components/dashboard/dashboard_admin_list";
+import DashboardHeader from "../components/dashboard/dashboard_department";
 
 const Dashboard = () => {
   return (
-    <div>
+    <>
       <DashboardHeader />
-    </div>
+      <DepartmentAdminHeader />
+      <DashboardAdminList />
+    </>
   );
 };
 

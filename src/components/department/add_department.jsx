@@ -7,7 +7,7 @@ import {
   useCreateDepartmentMutation,
   useGetAllDepartmentsQuery,
 } from "../../redux/features/department/departmentApi";
-import { options } from "./dashboard.utils";
+import { options } from "./department.utils";
 
 const AddDepartment = () => {
   const {
@@ -19,6 +19,7 @@ const AddDepartment = () => {
   const [createDepartment] = useCreateDepartmentMutation();
   const [departments, setDepartments] = useState([]);
   const { data } = useGetAllDepartmentsQuery(undefined);
+  
   useEffect(() => {
     if (data && Array.isArray(data.data)) {
       setDepartments(data.data);
@@ -59,6 +60,7 @@ const AddDepartment = () => {
         <select
           {...register("departmentName", { required: true })}
           className="select select-bordered select-sm w-full max-w-xs mt-4"
+          style={{ outline: "none" }}
         >
           <option value="" disabled selected>
             Select Options
