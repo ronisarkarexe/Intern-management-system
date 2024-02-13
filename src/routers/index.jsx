@@ -6,6 +6,7 @@ import ProfileComponent from "../shared/Profile.Component";
 import Department from "../components/department/department";
 import Login from "../pages/Login";
 import PrivateRoute from "../pages/PrivateRoute";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 

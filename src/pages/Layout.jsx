@@ -2,11 +2,12 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { useDispatch } from "react-redux";
 import { deleteAccessTokenFromState } from "../redux/features/auth/authSlice";
+import { Button } from "antd";
 
 const Layout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const handelLogOut = () => {
     localStorage.removeItem("accessToken");
     navigate("/login");
@@ -31,7 +32,7 @@ const Layout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+        <ul className="menu p-4 pb-1 w-80 min-h-full bg-base-200 text-base-content">
           <li>
             <Link to="/">
               <a>Dashboard</a>
@@ -48,19 +49,31 @@ const Layout = () => {
             </Link>
           </li>
 
-          <div className="mt-auto">
+          <div className="mt-auto bg-green-200 py-1 rounded">
             <div className="flex justify-evenly">
               <div className="cursor-pointer">
                 <Link to="/user-profile">
-                  <CgProfile fontSize={40} />
+                  <CgProfile
+                    fontSize={30}
+                    style={{
+                      borderColor: "#1890ff",
+                      color: "#1890ff",
+                    }}
+                  />
                 </Link>
               </div>
               <div className="cursor-pointer">
-                <Link>
-                  <h3 className="text-2xl" onClick={handelLogOut}>
-                    LogOut
-                  </h3>
-                </Link>
+                <Button
+                  type="primary"
+                  style={{
+                    backgroundColor: "#1890ff",
+                    borderColor: "#1890ff",
+                    color: "#fff",
+                  }}
+                  onClick={handelLogOut}
+                >
+                  LogOut
+                </Button>
               </div>
             </div>
           </div>
