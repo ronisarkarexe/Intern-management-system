@@ -9,6 +9,7 @@ import { token } from "../../redux/utils";
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const from = location.state?.from.pathname || "/";
 
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const LoginPage = () => {
           dispatch(addAccessTokenId(result.data.accessToken));
         }
         message.success("Login successful.");
-        navigate(location.state?.from || "/");
+        navigate(from, { relative: true });
       }
     } catch (error) {
       message.error("Please select role.!");

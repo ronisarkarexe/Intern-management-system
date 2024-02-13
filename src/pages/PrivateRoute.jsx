@@ -6,11 +6,11 @@ const isAuthenticated = () => {
 };
 
 const PrivateRoute = ({ children }) => {
-  const { pathname } = useLocation();
+  const location = useLocation();
   if (isAuthenticated) {
     return children;
   } else {
-    return <Navigate to="/login" state={{ path: pathname }} />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 };
 
