@@ -21,8 +21,8 @@ const AddDepartment = () => {
   const { data } = useGetAllDepartmentsQuery(undefined);
   
   useEffect(() => {
-    if (data && Array.isArray(data.data)) {
-      setDepartments(data.data);
+    if (data && Array.isArray(data.data.data)) {
+      setDepartments(data.data.data);
     }
   }, [data]);
 

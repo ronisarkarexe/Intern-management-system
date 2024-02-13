@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import HomeLayout from "../pages/HomeLayout";
 import ProfileComponent from "../shared/Profile.Component";
 import Department from "../components/department/department";
+import Login from "../pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
         element: <ProfileComponent />,
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

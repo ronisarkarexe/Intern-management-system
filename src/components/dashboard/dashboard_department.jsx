@@ -7,8 +7,8 @@ const DashboardHeader = () => {
   const [departments, setDepartments] = useState([]);
   const { data, isLoading } = useGetAllDepartmentsQuery(undefined);
   useEffect(() => {
-    if (data && Array.isArray(data.data)) {
-      setDepartments(data.data);
+    if (data && Array.isArray(data.data.data)) {
+      setDepartments(data.data.data);
     }
   }, [data]);
 

@@ -6,8 +6,8 @@ const DashboardAdminList = () => {
   const [allAdmins, setAllAdmins] = useState([]);
   const { data, isLoading } = useGetAllAdminQuery(undefined);
   useEffect(() => {
-    if (data && Array.isArray(data.data)) {
-      setAllAdmins(data.data);
+    if (data && Array.isArray(data.data.data)) {
+      setAllAdmins(data.data.data);
     }
   }, [data]);
 
@@ -33,7 +33,7 @@ const DashboardAdminList = () => {
               <th>{index + 1}</th>
               <th>{admin.name}</th>
               <th>{admin.email}</th>
-              <th>{admin.departmentId.departmentName}</th>
+              <th>{admin?.departmentId?.departmentName}</th>
               <th>{getLocalTime(admin.createdAt)}</th>
             </tr>
           ))}

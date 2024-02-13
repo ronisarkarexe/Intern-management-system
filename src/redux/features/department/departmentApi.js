@@ -1,9 +1,15 @@
 import api from "../../api/apiSlice";
+import { token } from "../../utils";
 
 const departmentApi = api.injectEndpoints({
   endpoints: (build) => ({
     getAllDepartments: build.query({
-      query: () => "/department",
+      query: () => ({
+        url: "/department",
+        headers: {
+          Authorization: token,
+        },
+      }),
       providesTags: ["Create", "Assign", "Delete"],
     }),
     createDepartment: build.mutation({
@@ -11,6 +17,9 @@ const departmentApi = api.injectEndpoints({
         url: "/department",
         method: "POST",
         body: data,
+        headers: {
+          Authorization: token,
+        },
       }),
       transformResponse: (response) => response.message,
       invalidatesTags: ["Create"],
@@ -20,6 +29,9 @@ const departmentApi = api.injectEndpoints({
         url: `/department/${id}/assign-admin`,
         method: "POST",
         body: data,
+        headers: {
+          Authorization: token,
+        },
       }),
       transformResponse: (response) => response.message,
       invalidatesTags: ["Assign"],
@@ -28,6 +40,9 @@ const departmentApi = api.injectEndpoints({
       query: (id) => ({
         url: `/department/${id}`,
         method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
       }),
       transformResponse: (response) => response.message,
       invalidatesTags: ["Delete"],
