@@ -1,7 +1,18 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import { useDispatch } from "react-redux";
+import { deleteAccessTokenFromState } from "../redux/features/auth/authSlice";
 
 const Layout = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const handelLogOut = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/login");
+    dispatch(deleteAccessTokenFromState());
+  };
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -46,7 +57,9 @@ const Layout = () => {
               </div>
               <div className="cursor-pointer">
                 <Link>
-                  <h3 className="text-2xl">LogOut</h3>
+                  <h3 className="text-2xl" onClick={handelLogOut}>
+                    LogOut
+                  </h3>
                 </Link>
               </div>
             </div>
