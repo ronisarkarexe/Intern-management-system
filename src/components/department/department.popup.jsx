@@ -19,8 +19,8 @@ const DepartmentPopup = ({ isModalOpen, setIsModalOpen }) => {
 
   const { data } = useGetAllAdminQuery(undefined);
   useEffect(() => {
-    if (data && Array.isArray(data.data)) {
-      setAllAdmins(data.data);
+    if (data && Array.isArray(data.data.data)) {
+      setAllAdmins(data.data.data);
     }
   }, [data]);
 
