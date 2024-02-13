@@ -5,11 +5,16 @@ import HomeLayout from "../pages/HomeLayout";
 import ProfileComponent from "../shared/Profile.Component";
 import Department from "../components/department/department";
 import Login from "../pages/Login";
+import PrivateRoute from "../pages/PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomeLayout />,
+    element: (
+      <PrivateRoute>
+        <HomeLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/",
