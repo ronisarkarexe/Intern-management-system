@@ -1,25 +1,30 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Radio, message } from "antd";
 import { useLoginUserMutation } from "../../redux/features/auth/auth";
 import { useDispatch } from "react-redux";
 import { addAccessTokenId } from "../../redux/features/auth/authSlice";
+import { token } from "../../redux/utils";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from.pathname || "/";
+
   const [loginUser] = useLoginUserMutation();
   const dispatch = useDispatch();
+
   const onFinish = async (values) => {
     try {
       const result = await loginUser(values);
       if (result && result.data) {
-        if (values.remember) {
+        if (values.remember && !token) {
           localStorage.setItem("accessToken", result.data.accessToken);
         } else {
           dispatch(addAccessTokenId(result.data.accessToken));
         }
         message.success("Login successful.");
-        navigate("/");
+        navigate(from, { relative: true });
       }
     } catch (error) {
       message.error("Please select role.!");

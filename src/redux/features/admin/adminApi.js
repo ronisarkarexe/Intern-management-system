@@ -10,9 +10,31 @@ const adminApi = api.injectEndpoints({
           Authorization: token,
         },
       }),
-      providesTags: ["Assign"],
+      providesTags: ["Assign, AdminCreate", "Delete"],
+    }),
+    createAdmin: build.mutation({
+      query: (data) => ({
+        url: "/admin",
+        method: "POST",
+        body: data,
+        headers: {
+          Authorization: token,
+        },
+      }),
+      transformResponse: (response) => response.message,
+      invalidatesTags: ["AdminCreate"],
+    }),
+    deleteAdmin: build.mutation({
+      query: (id) => ({
+        url: `/admin/${id}`,
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      }),
+      invalidatesTags: ["Delete"],
     }),
   }),
 });
 
-export const { useGetAllAdminQuery } = adminApi;
+export const { useGetAllAdminQuery, useCreateAdminMutation, useDeleteAdminMutation } = adminApi;
