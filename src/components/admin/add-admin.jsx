@@ -11,7 +11,7 @@ const AddAdmin = () => {
   const onFinish = async (values) => {
     const res = await createAdmin(values);
     if (res) {
-      toast(`${res?.data?.message}`, {
+      toast(`Admin created successfully.!`, {
         autoClose: 1000,
         theme: "light",
         type: "success",
@@ -23,41 +23,41 @@ const AddAdmin = () => {
   return (
     <div className="m-4" style={{ width: "40%" }}>
       <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true,
-        }}
+        form={form}
+        name="control-hooks"
         onFinish={onFinish}
+        style={{
+          maxWidth: 600,
+        }}
       >
         <Form.Item
           name="name"
           rules={[
             {
               required: true,
-              message: "Please input your Name!",
+              message: "Please enter you name!",
             },
           ]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            type="text"
-            placeholder="Enter your name"
+            placeholder="Enter Your Name"
           />
         </Form.Item>
+
         <Form.Item
           name="email"
           rules={[
             {
               required: true,
-              message: "Please input your Email!",
+              message: "Please enter you email!",
             },
           ]}
         >
           <Input
             prefix={<MailOutlined className="site-form-item-icon" />}
+            placeholder="Enter Your Email"
             type="email"
-            placeholder="Enter your email!"
           />
         </Form.Item>
 
@@ -66,31 +66,28 @@ const AddAdmin = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Password!",
+              message: "Please enter your password!",
             },
           ]}
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
+            placeholder="Enter Your Password"
             type="password"
-            placeholder="Enter your password!"
           />
         </Form.Item>
 
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
-            style={{
-              backgroundColor: "#1890ff",
-              borderColor: "#1890ff",
-              color: "#fff",
-            }}
-          >
-            Save
-          </Button>
-        </Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{
+            backgroundColor: "#1890ff",
+            borderColor: "#1890ff",
+            color: "#fff",
+          }}
+        >
+          Add Admin
+        </Button>
       </Form>
       <ToastContainer position="top-right" />
     </div>

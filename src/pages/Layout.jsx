@@ -48,6 +48,11 @@ const Layout = () => {
               <a>Add Admin</a>
             </Link>
           </li>
+          <li>
+            <Link to="/intern">
+              <a>Add Intern</a>
+            </Link>
+          </li>
 
           <div className="mt-auto bg-green-200 py-1 rounded">
             <div className="flex justify-evenly">

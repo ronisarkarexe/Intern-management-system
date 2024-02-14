@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import PrivateRoute from "../pages/PrivateRoute";
 import NotFound from "../pages/NotFound";
 import Admin from "../pages/Admin";
+import Intern from "../pages/Intern";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/user-profile",
         element: <ProfileComponent />,
+      },
+      {
+        path: "/intern",
+        element: <Intern />,
       },
     ],
   },
