@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import AddAdmin from "../pages/AddAdmin";
 import Dashboard from "../pages/Dashboard";
 import HomeLayout from "../pages/HomeLayout";
 import ProfileComponent from "../shared/Profile.Component";
@@ -7,6 +6,7 @@ import Department from "../components/department/department";
 import Login from "../pages/Login";
 import PrivateRoute from "../pages/PrivateRoute";
 import NotFound from "../pages/NotFound";
+import Admin from "../pages/Admin";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <AddAdmin />,
+        element: <Admin />,
       },
       {
         path: "/user-profile",
