@@ -5,7 +5,7 @@ const internApi = api.injectEndpoints({
   endpoints: (build) => ({
     getAllInterns: build.query({
       query: () => ({
-        url: "/department",
+        url: "/intern",
         headers: {
           Authorization: token,
         },
