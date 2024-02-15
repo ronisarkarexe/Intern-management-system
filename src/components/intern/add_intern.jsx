@@ -11,16 +11,33 @@ import {
   Select,
   Space,
 } from "antd";
+import moment from "moment";
+
 const { Option } = Select;
 
 const AdminListComponent = () => {
   const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
+
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
+
+  const onFinish = (values) => {
+    const formattedValues = {
+      ...values,
+      joinDate: moment(values.joinDate).format("YYYY-MM-DD"),
+      endDate: moment(values.endDate).format("YYYY-MM-DD"),
+    };
+
+    console.log("Form values:", formattedValues);
+    onClose();
+    form.resetFields();
+  };
+
   return (
     <div className="m-4">
       <Button
@@ -49,7 +66,7 @@ const AdminListComponent = () => {
           <Space>
             <Button onClick={onClose}>Cancel</Button>
             <Button
-              onClick={onClose}
+              onClick={() => form.submit()}
               type="primary"
               style={{
                 backgroundColor: "#1890ff",
@@ -62,36 +79,54 @@ const AdminListComponent = () => {
           </Space>
         }
       >
-        <Form layout="vertical" hideRequiredMark>
+        <Form
+          layout="vertical"
+          form={form}
+          name="control-hooks"
+          onFinish={onFinish}
+        >
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="name"
-                label="Name"
+                name="firstName"
+                label="First Name"
                 rules={[
                   {
                     required: true,
-                    message: "Please enter user name",
-                    type: "text",
+                    message: "Please enter user first name",
                   },
                 ]}
               >
-                <Input placeholder="Please enter user name" />
+                <Input placeholder="Please enter user first name" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="lastName"
+                label="Last Name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter user last name",
+                  },
+                ]}
+              >
+                <Input placeholder="Please enter user last name" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 name="email"
-                label="Email"
+                label="Email Address"
                 rules={[
                   {
                     required: true,
-                    message: "Please enter user name",
+                    message: "Please enter user email",
                     type: "email",
                   },
                 ]}
               >
-                <Input placeholder="Please enter user name" />
+                <Input placeholder="Please enter user email" />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -101,16 +136,13 @@ const AdminListComponent = () => {
                 rules={[
                   {
                     required: true,
-                    message: "Please enter url",
-                    type: "password",
+                    message: "Please enter your password",
                   },
                 ]}
               >
-                <Input placeholder="Please enter url" />
+                <Input placeholder="Please enter your password" />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="gender"
@@ -126,6 +158,20 @@ const AdminListComponent = () => {
                   <Option value="male">Male</Option>
                   <Option value="female">Female</Option>
                 </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="contact"
+                label="Contact No."
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your contact no",
+                  },
+                ]}
+              >
+                <Input placeholder="Please enter your contact no" />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -148,62 +194,69 @@ const AdminListComponent = () => {
                 />
               </Form.Item>
             </Col>
-          </Row>
-          <Col span={12}>
-            <Form.Item
-              name="endDate"
-              label="DateTime"
-              rules={[
-                {
-                  required: true,
-                  message: "Please choose the dateTime",
-                  type: "date",
-                },
-              ]}
-            >
-              <DatePicker.RangePicker
-                style={{
-                  width: "100%",
-                }}
-                getPopupContainer={(trigger) => trigger.parentElement}
-              />
-            </Form.Item>
-          </Col>
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="department"
+                name="endDate"
+                label="End Date"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please end date",
+                    type: "date",
+                  },
+                ]}
+              >
+                <DatePicker
+                  style={{
+                    width: "100%",
+                  }}
+                  getPopupContainer={(trigger) => trigger.parentElement}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="departmentId"
                 label="Department"
                 rules={[
                   {
                     required: true,
-                    message: "Please choose the approver",
+                    message: "Select department",
                   },
                 ]}
               >
-                <Select placeholder="Please choose the approver">
+                <Select placeholder="Select department">
                   <Option value="hr">Hr</Option>
                   <Option value="backend">Backend</Option>
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
+            <Col span={12}>
               <Form.Item
-                name="description"
-                label="Description"
+                name="city"
+                label="City"
                 rules={[
                   {
                     required: true,
-                    message: "please enter url description",
+                    message: "Please enter your city",
                   },
                 ]}
               >
-                <Input.TextArea
-                  rows={4}
-                  placeholder="please enter url description"
-                />
+                <Input placeholder="Please enter your city" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name="collageName"
+                label="Collage Name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your collage name",
+                  },
+                ]}
+              >
+                <Input placeholder="Please enter your collage name" />
               </Form.Item>
             </Col>
           </Row>
