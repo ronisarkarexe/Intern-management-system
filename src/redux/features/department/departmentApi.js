@@ -10,7 +10,7 @@ const departmentApi = api.injectEndpoints({
           Authorization: token,
         },
       }),
-      providesTags: ["Create", "Assign", "Delete"],
+      providesTags: ["Create", "Assign", "DeleteDepartment"],
     }),
     createDepartment: build.mutation({
       query: (data) => ({
@@ -45,7 +45,7 @@ const departmentApi = api.injectEndpoints({
         },
       }),
       transformResponse: (response) => response.message,
-      invalidatesTags: ["Delete"],
+      invalidatesTags: ["DeleteDepartment"],
     }),
   }),
 });

@@ -10,8 +10,34 @@ const internApi = api.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["CreateIntern", "DeleteIntern"],
+    }),
+    createIntern: build.mutation({
+      query: (data) => ({
+        url: "/intern",
+        method: "POST",
+        body: data,
+        headers: {
+          Authorization: token,
+        },
+      }),
+      invalidatesTags: ["CreateIntern"],
+    }),
+    deleteIntern: build.mutation({
+      query: (id) => ({
+        url: `/intern/${id}`,
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      }),
+      invalidatesTags: ["DeleteIntern"],
     }),
   }),
 });
 
-export const { useGetAllInternsQuery } = internApi;
+export const {
+  useGetAllInternsQuery,
+  useCreateInternMutation,
+  useDeleteInternMutation,
+} = internApi;

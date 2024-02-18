@@ -1,22 +1,30 @@
 import { useEffect, useState } from "react";
-import { useGetAllInternsQuery } from "../../redux/features/intern/internApi";
-import { Button, Table } from "antd";
+import {
+  useDeleteInternMutation,
+  useGetAllInternsQuery,
+} from "../../redux/features/intern/internApi";
+import { Button, Table, message } from "antd";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
 
 const ViewListComponent = () => {
   const [interns, setInterns] = useState([]);
   const { data, isLoading } = useGetAllInternsQuery();
-
+  const [deleteIntern] = useDeleteInternMutation();
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setInterns(data.data.data);
     }
   }, [data]);
 
-  console.log(interns);
-
-  const handleDelete = () => {
-    //
+  const handleDelete = async (id) => {
+    try {
+      const res = await deleteIntern(id);
+      if (res) {
+        message.success(res.data);
+      }
+    } catch (error) {
+      message.error("An error occurred while deleting department");
+    }
   };
 
   const columns = [
@@ -27,23 +35,40 @@ const ViewListComponent = () => {
       render: (text, record, index) => index + 1,
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: "FirstName",
+      dataIndex: "firstName",
+    },
+    {
+      title: "LastName",
+      dataIndex: "lastName",
     },
     {
       title: "Email",
       dataIndex: "email",
     },
     {
-      title: "Intern Access",
-      dataIndex: "departmentId",
-      render: (departmentId) =>
-        departmentId?.internDetails.length ? "Yes" : "No",
+      title: "Gender",
+      dataIndex: "gender",
     },
     {
-      title: "Department",
-      dataIndex: "departmentId",
-      render: (departmentId) => departmentId?.departmentName,
+      title: "Join Date",
+      dataIndex: "joinDate",
+    },
+    {
+      title: "End Date",
+      dataIndex: "endDate",
+    },
+    {
+      title: "Contact",
+      dataIndex: "contact",
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+    },
+    {
+      title: "Collage Name",
+      dataIndex: "collageName",
     },
     {
       title: "Action",
@@ -79,6 +104,7 @@ const ViewListComponent = () => {
         }}
         scroll={{
           y: 240,
+          x: 1400,
         }}
       />
     </div>
