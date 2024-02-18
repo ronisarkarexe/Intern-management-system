@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -12,12 +12,25 @@ import {
   Space,
 } from "antd";
 import moment from "moment";
+import { useGetAllDepartmentsQuery } from "../../redux/features/department/departmentApi";
+import { useCreateInternMutation } from "../../redux/features/intern/internApi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { Option } = Select;
 
 const AdminListComponent = () => {
+  const [departments, setDepartments] = useState([]);
+  const { data, isLoading } = useGetAllDepartmentsQuery(undefined);
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
+  const [createIntern] = useCreateInternMutation();
+
+  useEffect(() => {
+    if (data && Array.isArray(data.data.data)) {
+      setDepartments(data.data.data);
+    }
+  }, [data]);
 
   const showDrawer = () => {
     setOpen(true);
@@ -26,17 +39,27 @@ const AdminListComponent = () => {
     setOpen(false);
   };
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     const formattedValues = {
       ...values,
       joinDate: moment(values.joinDate).format("YYYY-MM-DD"),
       endDate: moment(values.endDate).format("YYYY-MM-DD"),
     };
-
-    console.log("Form values:", formattedValues);
+    const res = await createIntern(formattedValues);
+    if (res) {
+      toast(`Admin created successfully.!`, {
+        autoClose: 1000,
+        theme: "light",
+        type: "success",
+      });
+    }
     onClose();
     form.resetFields();
   };
+
+  if (isLoading) {
+    return <div>Loading...!</div>;
+  }
 
   return (
     <div className="m-4">
@@ -226,8 +249,11 @@ const AdminListComponent = () => {
                 ]}
               >
                 <Select placeholder="Select department">
-                  <Option value="hr">Hr</Option>
-                  <Option value="backend">Backend</Option>
+                  {departments.map((department) => (
+                    <Option key={department._id} value={department._id}>
+                      {department.departmentName}
+                    </Option>
+                  ))}
                 </Select>
               </Form.Item>
             </Col>
@@ -262,6 +288,7 @@ const AdminListComponent = () => {
           </Row>
         </Form>
       </Drawer>
+      <ToastContainer position="top-right" />
     </div>
   );
 };
