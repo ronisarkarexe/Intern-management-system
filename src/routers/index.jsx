@@ -8,6 +8,11 @@ import PrivateRoute from "../pages/PrivateRoute";
 import NotFound from "../pages/NotFound";
 import Admin from "../pages/Admin";
 import Intern from "../pages/Intern";
+import Event from "../pages/Event";
+import Salary from "../pages/Salary";
+import Certificate from "../pages/Certificate";
+import Task from "../pages/Task";
+import Leave from "../pages/Leave";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +42,26 @@ const router = createBrowserRouter([
       {
         path: "/intern",
         element: <Intern />,
+      },
+      {
+        path: "/event",
+        element: <Event />,
+      },
+      {
+        path: "/salary",
+        element: <Salary />,
+      },
+      {
+        path: "/certificate",
+        element: <Certificate />,
+      },
+      {
+        path: "/task",
+        element: <Task />,
+      },
+      {
+        path: "/leave",
+        element: <Leave />,
       },
     ],
   },
