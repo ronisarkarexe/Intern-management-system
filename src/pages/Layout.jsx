@@ -45,12 +45,37 @@ const Layout = () => {
           </li>
           <li>
             <Link to="/admin">
-              <a>Add Admin</a>
+              <a>Admin</a>
             </Link>
           </li>
           <li>
             <Link to="/intern">
-              <a>Add Intern</a>
+              <a>Intern</a>
+            </Link>
+          </li>
+          <li>
+            <Link to="/event">
+              <a>Event</a>
+            </Link>
+          </li>
+          <li>
+            <Link to="/salary">
+              <a>Salary</a>
+            </Link>
+          </li>
+          <li>
+            <Link to="/task">
+              <a>Task</a>
+            </Link>
+          </li>
+          <li>
+            <Link to="/leave">
+              <a>Leave</a>
+            </Link>
+          </li>
+          <li>
+            <Link to="/certificate">
+              <a>Certificate</a>
             </Link>
           </li>
 

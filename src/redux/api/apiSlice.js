@@ -12,6 +12,8 @@ const api = createApi({
     "DeleteDepartment",
     "CreateIntern",
     "DeleteIntern",
+    "CreateEvent",
+    "DeleteEvent",
   ],
   endpoints: () => ({}),
 });
