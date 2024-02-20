@@ -18,6 +18,10 @@ const api = createApi({
     "DeleteSalary",
     "CreateTask",
     "DeleteTask",
+    "CreateLeave",
+    "DeleteLeave",
+    "CreateCertificate",
+    "DeleteCertificate",
   ],
   endpoints: () => ({}),
 });
