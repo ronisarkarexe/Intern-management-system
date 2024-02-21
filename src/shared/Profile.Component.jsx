@@ -19,18 +19,6 @@ const ProfileComponent = () => {
     setIsOpenModal(true);
   };
 
-  // const handelGenerateCertificate = (intern) => {
-  //   setIsOpenModal(true);
-  //   const generateCertificate = {
-  //     name: intern.firstName + " " + intern.lastName,
-  //     signature: "https://i.ibb.co/1Mf8t5s/signature-new.png",
-  //     department: intern.departmentId?.departmentName,
-  //     joinDate: intern.joinDate,
-  //     endDate: intern.endDate,
-  //   };
-  //   console.log("handelGenerateCertificate", generateCertificate);
-  // };
-
   if (isLoading) {
     return <div>Loading...!</div>;
   }

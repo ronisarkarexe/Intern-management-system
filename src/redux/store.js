@@ -4,9 +4,11 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import api from "./api/apiSlice";
 import departmentReducer from "./features/department/departmentSlice";
 import authReducer from "./features/auth/authSlice";
+import profileReducer from "./features/profile/profileSlice";
 
 const store = configureStore({
   reducer: {
+    user: profileReducer,
     auth: authReducer,
     department: departmentReducer,
     intern: internReducer,
