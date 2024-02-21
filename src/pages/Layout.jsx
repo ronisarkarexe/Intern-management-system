@@ -1,13 +1,14 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteAccessTokenFromState } from "../redux/features/auth/authSlice";
 import { Button } from "antd";
 
 const Layout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.user);
+  console.log(user?.user?.role)
   const handelLogOut = () => {
     localStorage.removeItem("accessToken");
     navigate("/login");
@@ -33,21 +34,35 @@ const Layout = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu p-4 pb-1 w-80 min-h-full bg-base-200 text-base-content">
-          <li>
-            <Link to="/">
-              <a>Dashboard</a>
-            </Link>
-          </li>
-          <li>
-            <Link to="/department">
-              <a>Department</a>
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin">
-              <a>Admin</a>
-            </Link>
-          </li>
+          {user?.user?.role === "ADMIN" && (
+            <>
+              <li>
+                <Link to="/">
+                  <a>Dashboard</a>
+                </Link>
+              </li>
+              <li>
+                <Link to="/department">
+                  <a>Department</a>
+                </Link>
+              </li>
+              <li>
+                <Link to="/admin">
+                  <a>Admin</a>
+                </Link>
+              </li>
+              <li>
+                <Link to="/salary">
+                  <a>Salary</a>
+                </Link>
+              </li>
+              <li>
+                <Link to="/certificate">
+                  <a>Certificate</a>
+                </Link>
+              </li>
+            </>
+          )}
           <li>
             <Link to="/intern">
               <a>Intern</a>
@@ -56,11 +71,6 @@ const Layout = () => {
           <li>
             <Link to="/event">
               <a>Event</a>
-            </Link>
-          </li>
-          <li>
-            <Link to="/salary">
-              <a>Salary</a>
             </Link>
           </li>
           <li>
@@ -74,8 +84,8 @@ const Layout = () => {
             </Link>
           </li>
           <li>
-            <Link to="/certificate">
-              <a>Certificate</a>
+            <Link to="/generate-certificate">
+              <a>Generate Certificate</a>
             </Link>
           </li>
 

@@ -10,9 +10,11 @@ const ProfileComponent = () => {
       setProfile(data.data);
     }
   }, [data]);
+
   if (isLoading) {
     return <div>Loading...!</div>;
   }
+
   return (
     <div className="m-4">
       <h1 className="text-xl">Name: {profile?.name}</h1>

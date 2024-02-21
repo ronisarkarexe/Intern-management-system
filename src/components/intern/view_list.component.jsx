@@ -10,6 +10,7 @@ const ViewListComponent = () => {
   const [interns, setInterns] = useState([]);
   const { data, isLoading } = useGetAllInternsQuery();
   const [deleteIntern] = useDeleteInternMutation();
+
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setInterns(data.data.data);
@@ -94,19 +95,21 @@ const ViewListComponent = () => {
   }
 
   return (
-    <div className="m-4">
-      <h3 className="text-xl">Intern Lists</h3>
-      <Table
-        columns={columns}
-        dataSource={interns}
-        pagination={{
-          pageSize: 50,
-        }}
-        scroll={{
-          y: 240,
-          x: 1400,
-        }}
-      />
+    <div>
+      <div className="m-4">
+        <h3 className="text-xl">Intern Lists</h3>
+        <Table
+          columns={columns}
+          dataSource={interns}
+          pagination={{
+            pageSize: 50,
+          }}
+          scroll={{
+            y: 240,
+            x: 1900,
+          }}
+        />
+      </div>
     </div>
   );
 };
