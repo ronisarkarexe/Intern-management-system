@@ -78,6 +78,11 @@ const Layout = () => {
               <a>Certificate</a>
             </Link>
           </li>
+          <li>
+            <Link to="/generate-certificate">
+              <a>Generate Certificate</a>
+            </Link>
+          </li>
 
           <div className="mt-auto bg-green-200 py-1 rounded">
             <div className="flex justify-evenly">

@@ -13,6 +13,7 @@ import Salary from "../pages/Salary";
 import Certificate from "../pages/Certificate";
 import Task from "../pages/Task";
 import Leave from "../pages/Leave";
+import GenerateCertificate from "../pages/GenerateCertificate";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/leave",
         element: <Leave />,
+      },
+      {
+        path: "/generate-certificate",
+        element: <GenerateCertificate />,
       },
     ],
   },
