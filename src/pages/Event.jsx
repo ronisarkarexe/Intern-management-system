@@ -6,7 +6,7 @@ const Event = () => {
   const user = useSelector((state) => state.user.user);
   return (
     <>
-      {user.role === "ADMIN" && <AddEventComponent />}
+      {user?.role === "ADMIN" && <AddEventComponent />}
       <ViewListComponent />
     </>
   );

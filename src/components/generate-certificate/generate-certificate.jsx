@@ -3,7 +3,7 @@ import "./generateCer.css";
 import moment from "moment";
 // import html2canvas from "html2canvas";
 
-const GenerateCertificateComponent = ({ profile }) => {
+const ViewGenerateCertificate = ({ profile }) => {
   const capitalizeFirstLetter = (name) => {
     return name?.replace(/\b\w/g, (match) => match.toUpperCase());
   };
@@ -70,4 +70,4 @@ const GenerateCertificateComponent = ({ profile }) => {
   );
 };
 
-export default GenerateCertificateComponent;
+export default ViewGenerateCertificate;
