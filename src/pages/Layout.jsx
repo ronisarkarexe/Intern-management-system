@@ -8,7 +8,7 @@ const Layout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  console.log(user?.user?.role)
+
   const handelLogOut = () => {
     localStorage.removeItem("accessToken");
     navigate("/login");
@@ -83,11 +83,13 @@ const Layout = () => {
               <a>Leave</a>
             </Link>
           </li>
-          <li>
-            <Link to="/generate-certificate">
-              <a>Generate Certificate</a>
-            </Link>
-          </li>
+          {user?.user?.isInternshipCompleted && (
+            <li>
+              <Link to="/generate-certificate">
+                <a>Generate Certificate</a>
+              </Link>
+            </li>
+          )}
 
           <div className="mt-auto bg-green-200 py-1 rounded">
             <div className="flex justify-evenly">

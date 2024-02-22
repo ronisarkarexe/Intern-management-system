@@ -22,6 +22,7 @@ const api = createApi({
     "DeleteLeave",
     "CreateCertificate",
     "DeleteCertificate",
+    "UpdateTaskStatus",
   ],
   endpoints: () => ({}),
 });

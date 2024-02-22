@@ -5,17 +5,21 @@ import {
 } from "../../redux/features/intern/internApi";
 import { Button, Table, message } from "antd";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/features/profile/profileSlice";
 
 const ViewListComponent = () => {
   const [interns, setInterns] = useState([]);
   const { data, isLoading } = useGetAllInternsQuery();
   const [deleteIntern] = useDeleteInternMutation();
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setInterns(data.data.data);
     }
   }, [data]);
+
+  dispatch(addUser(interns));
 
   const handleDelete = async (id) => {
     try {

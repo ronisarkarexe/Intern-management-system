@@ -1,30 +1,16 @@
 import { useEffect, useState } from "react";
 import { useGetAllAdminQuery } from "../../redux/features/admin/adminApi";
 import { getLocalTime } from "../../utils/time-convert";
-import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
-import { useDispatch } from "react-redux";
-import { addUser } from "../../redux/features/profile/profileSlice";
 
 const DashboardAdminList = () => {
   const [allAdmins, setAllAdmins] = useState([]);
-  const [profile, setProfile] = useState(null);
   const { data, isLoading } = useGetAllAdminQuery(undefined);
-  const { data: profileData } = useGetProfileInfoQuery(undefined);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setAllAdmins(data.data.data);
     }
   }, [data]);
-
-  useEffect(() => {
-    if (profileData && Object(profileData.data)) {
-      setProfile(profileData.data);
-    }
-  }, [profileData]);
-
-  dispatch(addUser(profile));
 
   if (isLoading) {
     return <div>Loading...!</div>;
