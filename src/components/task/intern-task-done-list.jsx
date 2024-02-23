@@ -35,7 +35,9 @@ const InternTaskDoneList = ({ data }) => {
               </tbody>
             </table>
           ) : (
-            <div className="mt-3 opacity-3">Tasks not found!</div>
+            <div className="mt-3 opacity-3">
+              There are no task in Done list!
+            </div>
           )}
         </div>
       </CollapseUi>
