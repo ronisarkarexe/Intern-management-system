@@ -10,7 +10,7 @@ const salaryApi = api.injectEndpoints({
           Authorization: token,
         },
       }),
-      providesTags: ["CreateSalary", "DeleteSalary"],
+      providesTags: ["CreateSalary", "DeleteSalary", "UpdateSalaryApi"],
     }),
     createSalary: build.mutation({
       query: (data) => ({
@@ -33,6 +33,17 @@ const salaryApi = api.injectEndpoints({
       }),
       invalidatesTags: ["DeleteSalary"],
     }),
+    updateSalary: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/salary/${id}`,
+        method: "PATCH",
+        body: data,
+        headers: {
+          Authorization: token,
+        },
+      }),
+      invalidatesTags: ["UpdateSalaryApi"],
+    }),
   }),
 });
 
@@ -40,4 +51,5 @@ export const {
   useGetAllSalaryQuery,
   useCreateSalaryMutation,
   useDeleteSalaryMutation,
+  useUpdateSalaryMutation,
 } = salaryApi;
