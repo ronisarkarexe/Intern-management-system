@@ -25,6 +25,8 @@ const LoginPage = () => {
         }
         message.success("Login successful.");
         navigate(from, { relative: true });
+      } else {
+        message.error("Please select role.!");
       }
     } catch (error) {
       message.error("Please select role.!");
@@ -81,7 +83,7 @@ const LoginPage = () => {
           </Form.Item>
           <Form.Item>
             <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
+              <Checkbox disabled={true}>Remember me</Checkbox>
             </Form.Item>
           </Form.Item>
 

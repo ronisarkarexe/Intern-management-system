@@ -55,7 +55,10 @@ const ViewListComponent = () => {
     const formattedValues = {
       extendedDate: moment(selectedDate.extendedDate).format("YYYY-MM-DD"),
     };
-    const res = await updateTaskStatus({ id: taskId, data: formattedValues });
+    const res = await updateTaskStatus({
+      id: taskId,
+      data: selectedDate.extendedDate,
+    });
     if (res?.data) {
       toast(`Extended date successfully.!`, {
         autoClose: 1000,
@@ -69,6 +72,7 @@ const ViewListComponent = () => {
         type: "error",
       });
     }
+    setIsModalOpen(false);
   };
 
   const handleCancel = () => {

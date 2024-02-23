@@ -63,7 +63,7 @@ const ViewListComponent = () => {
     },
     {
       title: "Applied Date",
-      dataIndex: "appliedDate",
+      dataIndex: "createdAt",
     },
     {
       title: "Action",

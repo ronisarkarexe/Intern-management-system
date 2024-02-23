@@ -33,7 +33,7 @@ const AddLeave = () => {
       endDate: moment(values.endDate).format("YYYY-MM-DD"),
       appliedDate: moment(values.appliedDate).format("YYYY-MM-DD"),
     };
-    const res = await createLeave(formattedValues);
+    const res = await createLeave(values);
     if (res) {
       toast(`Leave added successfully.!`, {
         autoClose: 1000,
@@ -151,7 +151,7 @@ const AddLeave = () => {
               />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          {/* <Col span={12}>
             <Form.Item
               name="appliedDate"
               label="Applied Date"
@@ -170,7 +170,7 @@ const AddLeave = () => {
                 getPopupContainer={(trigger) => trigger.parentElement}
               />
             </Form.Item>
-          </Col>
+          </Col> */}
         </Row>
         <Button
           type="primary"

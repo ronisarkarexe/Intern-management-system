@@ -57,6 +57,7 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
                   <th>Deadline</th>
                   <th>Statue</th>
                   <th>Extend Deadline</th>
+                  <th>New Deadline</th>
                 </tr>
               </thead>
               <tbody>
@@ -67,7 +68,11 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
                       <div className="font-bold">{task.taskId.taskName}</div>
                     </td>
                     <td>{task.taskId.assignDate}</td>
-                    <td>{task.taskId.deadlineDate}</td>
+                    <td
+                      className={task.taskId.extendedDate ? "line-through" : ""}
+                    >
+                      {task.taskId.deadlineDate}
+                    </td>
                     <td>
                       <select
                         className="select select-bordered select-sm"
@@ -91,6 +96,7 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
                         <StrokeTextIcon title="Already applied!" />
                       )}
                     </td>
+                    <td>{task.taskId.extendedDate}</td>
                   </tr>
                 ))}
               </tbody>

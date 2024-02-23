@@ -34,7 +34,7 @@ const AddTask = () => {
       assignDate: moment(values.assignDate).format("YYYY-MM-DD"),
       deadlineDate: moment(values.deadlineDate).format("YYYY-MM-DD"),
     };
-    const res = await createTask(formattedValues);
+    const res = await createTask(values);
     if (res?.data) {
       toast(`Task added successfully.!`, {
         autoClose: 1000,

@@ -1,19 +1,14 @@
 import { Button, Col, DatePicker, Form, Input, Row } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import moment from "moment";
+// import moment from "moment";
 import { useCreateEventMutation } from "../../redux/features/event/eventApi";
 
 const AddEventComponent = () => {
   const [form] = Form.useForm();
   const [createEvent] = useCreateEventMutation();
   const onFinish = async (values) => {
-    const formattedValues = {
-      ...values,
-      startDate: moment(values.startDate).format("YYYY-MM-DD"),
-      endDate: moment(values.endDate).format("YYYY-MM-DD"),
-    };
-    const res = await createEvent(formattedValues);
+    const res = await createEvent(values);
     if (res?.data) {
       toast(`Event created successfully.!`, {
         autoClose: 1000,

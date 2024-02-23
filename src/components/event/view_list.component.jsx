@@ -54,7 +54,21 @@ const ViewListComponent = () => {
     },
     {
       title: "Status",
-      dataIndex: "eventImage",
+      dataIndex: "",
+      key: "status",
+      render: (record) => {
+        const currentDate = new Date();
+        const startDate = new Date(record.startDate);
+        const endDate = new Date(record.endDate);
+
+        if (endDate < currentDate) {
+          return "Inactive";
+        } else if (startDate <= currentDate && endDate >= currentDate) {
+          return "Ongoing";
+        } else if (startDate > currentDate) {
+          return "Upcoming";
+        }
+      },
     },
     {
       title: "Poster",
