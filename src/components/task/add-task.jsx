@@ -35,11 +35,17 @@ const AddTask = () => {
       deadlineDate: moment(values.deadlineDate).format("YYYY-MM-DD"),
     };
     const res = await createTask(formattedValues);
-    if (res) {
+    if (res?.data) {
       toast(`Task added successfully.!`, {
         autoClose: 1000,
         theme: "light",
         type: "success",
+      });
+    } else {
+      toast(`Failed to create task.!`, {
+        autoClose: 1000,
+        theme: "light",
+        type: "error",
       });
     }
     form.resetFields();

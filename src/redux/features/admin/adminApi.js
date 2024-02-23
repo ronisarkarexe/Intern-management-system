@@ -39,6 +39,15 @@ const adminApi = api.injectEndpoints({
       }),
       invalidatesTags: ["DeleteAdmin"],
     }),
+    getSingleAdmin: build.query({
+      query: (id) => ({
+        url: `/admin/${id}`,
+        method: "GET",
+        headers: {
+          Authorization: token,
+        },
+      }),
+    }),
   }),
 });
 
@@ -46,4 +55,5 @@ export const {
   useGetAllAdminQuery,
   useCreateAdminMutation,
   useDeleteAdminMutation,
+  useGetSingleAdminQuery,
 } = adminApi;

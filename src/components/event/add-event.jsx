@@ -14,11 +14,17 @@ const AddEventComponent = () => {
       endDate: moment(values.endDate).format("YYYY-MM-DD"),
     };
     const res = await createEvent(formattedValues);
-    if (res) {
+    if (res?.data) {
       toast(`Event created successfully.!`, {
         autoClose: 1000,
         theme: "light",
         type: "success",
+      });
+    } else {
+      toast(res?.error?.data?.message, {
+        autoClose: 1000,
+        theme: "light",
+        type: "error",
       });
     }
     form.resetFields();

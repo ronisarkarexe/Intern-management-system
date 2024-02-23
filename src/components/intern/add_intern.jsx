@@ -47,7 +47,7 @@ const AdminListComponent = () => {
     };
     const res = await createIntern(formattedValues);
     if (res) {
-      toast(`Admin created successfully.!`, {
+      toast(`Intern created successfully.!`, {
         autoClose: 1000,
         theme: "light",
         type: "success",

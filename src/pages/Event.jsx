@@ -1,12 +1,12 @@
-import { useSelector } from "react-redux";
 import AddEventComponent from "../components/event/add-event";
 import ViewListComponent from "../components/event/view_list.component";
+import { useGetProfileInfoQuery } from "../redux/features/profile/profileApi";
 
 const Event = () => {
-  const user = useSelector((state) => state.user.user);
+  const { data } = useGetProfileInfoQuery();
   return (
     <>
-      {user?.role === "ADMIN" && <AddEventComponent />}
+      {data?.data?.role === "ADMIN" && <AddEventComponent />}
       <ViewListComponent />
     </>
   );

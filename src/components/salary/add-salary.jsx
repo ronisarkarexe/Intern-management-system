@@ -33,11 +33,17 @@ const AddSalary = () => {
       status: "PENDING",
     };
     const res = await createSalary(newValues);
-    if (res) {
+    if (res?.data) {
       toast(`Salary added successfully.!`, {
         autoClose: 1000,
         theme: "light",
         type: "success",
+      });
+    } else {
+      toast(res?.error?.data?.message, {
+        autoClose: 1000,
+        theme: "light",
+        type: "error",
       });
     }
     form.resetFields();

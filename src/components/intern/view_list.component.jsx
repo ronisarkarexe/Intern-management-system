@@ -33,7 +33,7 @@ const ViewListComponent = () => {
       message.error("An error occurred while deleting department");
     }
   };
-  console.log(user.data.role);
+  
   const columns = [
     {
       title: "Index",
