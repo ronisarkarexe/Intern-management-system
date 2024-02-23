@@ -6,6 +6,7 @@ import {
   useGetAllSalaryQuery,
   useUpdateSalaryMutation,
 } from "../../redux/features/salary/salaryApi";
+import LoadingComponent from "../../shared-ui/loading";
 
 const { Option } = Select;
 const ViewListComponent = () => {
@@ -106,7 +107,7 @@ const ViewListComponent = () => {
   ];
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
   return (
     <div className="m-4">

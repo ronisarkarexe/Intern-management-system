@@ -8,6 +8,7 @@ import DeleteConfirmation from "../../shared-ui/delete_confirmation";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/features/profile/profileSlice";
 import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
+import LoadingComponent from "../../shared-ui/loading";
 
 const ViewListComponent = () => {
   const [interns, setInterns] = useState([]);
@@ -117,7 +118,7 @@ const ViewListComponent = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   return (

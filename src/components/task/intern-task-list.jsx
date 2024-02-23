@@ -15,11 +15,17 @@ const InternTaskList = () => {
       [e.target.name]: e.target.value,
     };
     const res = await updateTaskStatus({ id: taskId, data: changeStatus });
-    if (res) {
+    if (res.data) {
       toast(`Task status change to ${e.target.value}`, {
         autoClose: 2000,
         theme: "light",
         type: "success",
+      });
+    } else {
+      toast(`Failed to change status change to ${e.target.value}`, {
+        autoClose: 2000,
+        theme: "light",
+        type: "error",
       });
     }
   };

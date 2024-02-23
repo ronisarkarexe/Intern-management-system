@@ -10,6 +10,7 @@ import CustomModal from "../../shared-ui/custome-popup-model";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import LoadingComponent from "../../shared-ui/loading";
 
 const ViewListComponent = () => {
   const [tasks, setTasks] = useState([]);
@@ -147,7 +148,7 @@ const ViewListComponent = () => {
   ];
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
   return (
     <div className="m-4">

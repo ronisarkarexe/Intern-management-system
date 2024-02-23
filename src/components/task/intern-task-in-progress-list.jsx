@@ -28,7 +28,7 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
       isExtendDeadlineDate: true,
     };
     const res = await updateTaskStatus({ id: taskId, data: newData });
-    if (res) {
+    if (res.data) {
       setReason("");
       toast(`Applied extended date successfully!`, {
         autoClose: 2000,
@@ -36,6 +36,12 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
         type: "success",
       });
       setIsModalOpen(false);
+    } else {
+      toast(`Failed to extended date!`, {
+        autoClose: 2000,
+        theme: "light",
+        type: "error",
+      });
     }
   };
 

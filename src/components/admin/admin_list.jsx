@@ -5,6 +5,7 @@ import {
   useGetAllAdminQuery,
 } from "../../redux/features/admin/adminApi";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
+import LoadingComponent from "../../shared-ui/loading";
 
 const AdminListComponent = () => {
   const [allAdmins, setAllAdmins] = useState([]);
@@ -28,7 +29,7 @@ const AdminListComponent = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   const columns = [

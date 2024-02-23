@@ -10,7 +10,7 @@ const { Option } = Select;
 const AddSalary = () => {
   const [departments, setDepartments] = useState([]);
   const [interns, setInterns] = useState([]);
-  const { data, isLoading } = useGetAllDepartmentsQuery(undefined);
+  const { data } = useGetAllDepartmentsQuery(undefined);
   const { data: internData } = useGetAllInternsQuery();
   const [createSalary] = useCreateSalaryMutation();
   const [form] = Form.useForm();
@@ -48,10 +48,6 @@ const AddSalary = () => {
     }
     form.resetFields();
   };
-
-  if (isLoading) {
-    return <div>Loading...!</div>;
-  }
 
   return (
     <div className="m-4" style={{ width: "60%" }}>

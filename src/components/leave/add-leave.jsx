@@ -6,6 +6,7 @@ import { useGetAllDepartmentsQuery } from "../../redux/features/department/depar
 import { useGetAllInternsQuery } from "../../redux/features/intern/internApi";
 import moment from "moment";
 import { useCreateLeaveMutation } from "../../redux/features/leave/leaveApi";
+import LoadingComponent from "../../shared-ui/loading";
 const { Option } = Select;
 
 const AddLeave = () => {
@@ -45,7 +46,7 @@ const AddLeave = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   return (

@@ -4,6 +4,7 @@ import ProfileHeader from "../components/profile/profile-header";
 import BasicInfo from "../components/profile/basic-info";
 import ActivityInfo from "../components/profile/activity-info";
 import AdminInfo from "../components/profile/admin-info";
+import LoadingComponent from "../shared-ui/loading";
 
 const ProfileComponent = () => {
   const [adminId, setAdminId] = useState("");
@@ -20,7 +21,7 @@ const ProfileComponent = () => {
   }, [data]);
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   return (

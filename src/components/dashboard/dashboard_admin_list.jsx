@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetAllAdminQuery } from "../../redux/features/admin/adminApi";
 import { getLocalTime } from "../../utils/time-convert";
+import LoadingComponent from "../../shared-ui/loading";
 
 const DashboardAdminList = () => {
   const [allAdmins, setAllAdmins] = useState([]);
@@ -13,7 +14,7 @@ const DashboardAdminList = () => {
   }, [data]);
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   return (

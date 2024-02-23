@@ -1,11 +1,18 @@
-import { Flex, Spin } from "antd";
+import { Spin } from "antd";
 
-const Loading = () => {
+const LoadingComponent = () => {
   return (
-    <Flex align="center" gap="middle">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
       <Spin size="large" />
-    </Flex>
+    </div>
   );
 };
 
-export default Loading;
+export default LoadingComponent;

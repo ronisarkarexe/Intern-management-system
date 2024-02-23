@@ -9,6 +9,7 @@ import { addDepartmentId } from "../../redux/features/department/departmentSlice
 import { getLocalTime } from "../../utils/time-convert";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
 import { Button, message } from "antd";
+import LoadingComponent from "../../shared-ui/loading";
 
 const DepartmentList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +25,7 @@ const DepartmentList = () => {
   }, [data]);
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   const handelAssignAdmin = (departmentId) => {

@@ -7,6 +7,7 @@ import {
   useUpdateLeaveMutation,
 } from "../../redux/features/leave/leaveApi";
 import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
+import LoadingComponent from "../../shared-ui/loading";
 const { Option } = Select;
 
 const ViewListComponent = () => {
@@ -118,7 +119,7 @@ const ViewListComponent = () => {
   ];
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   return (
