@@ -24,6 +24,7 @@ const api = createApi({
     "DeleteCertificate",
     "UpdateTaskStatus",
     "UpdateSalaryApi",
+    "UpdateLeaveApi",
   ],
   endpoints: () => ({}),
 });

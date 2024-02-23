@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { Button, Table, message } from "antd";
+import { Button, Select, Table, message } from "antd";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
 import {
   useDeleteLeaveMutation,
   useGetAllLeaveQuery,
+  useUpdateLeaveMutation,
 } from "../../redux/features/leave/leaveApi";
+import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
+const { Option } = Select;
 
 const ViewListComponent = () => {
   const [leaves, setLeaves] = useState([]);
   const { data, isLoading } = useGetAllLeaveQuery();
+  const { data: user } = useGetProfileInfoQuery();
   const [deleteLeave] = useDeleteLeaveMutation();
-
+  const [updateLeave] = useUpdateLeaveMutation();
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setLeaves(data.data.data);
@@ -25,6 +29,18 @@ const ViewListComponent = () => {
       }
     } catch (error) {
       message.error("An error occurred while deleting department");
+    }
+  };
+
+  const handleStatusChange = async (id, value) => {
+    const newDate = {
+      status: value,
+    };
+    const res = await updateLeave({ id, data: newDate });
+    if (res.data) {
+      message.success("Leave updated successfully!");
+    } else {
+      message.error("Leave can not updated successfully!");
     }
   };
 
@@ -52,6 +68,16 @@ const ViewListComponent = () => {
     {
       title: "Status",
       dataIndex: "status",
+      render: (status, record) => (
+        <Select
+          defaultValue={status}
+          onChange={(value) => handleStatusChange(record._id, value)}
+        >
+          <Option value="Pending">Pending</Option>
+          <Option value="Approved">Approved</Option>
+          <Option value="Rejected">Rejected</Option>
+        </Select>
+      ),
     },
     {
       title: "Start Date",
@@ -80,7 +106,8 @@ const ViewListComponent = () => {
             danger
             size="small"
             disabled={
-              record.status === "Approved" || record.status === "Rejected"
+              (record.status === "Approved" || record.status === "Rejected") &&
+              user?.data?.role === "INTERN"
             }
           >
             Delete
@@ -96,7 +123,7 @@ const ViewListComponent = () => {
 
   return (
     <div className="m-4">
-      <h3 className="text-xl">Leave Lists</h3>
+      <h3 className="text-xl mb-4">Leave Lists</h3>
       <Table
         columns={columns}
         dataSource={leaves}

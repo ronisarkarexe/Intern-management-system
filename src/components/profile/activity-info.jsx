@@ -15,7 +15,6 @@ const ActivityInfo = ({ profile }) => {
     return acc;
   }, {});
   const totalCount = profile?.tasks?.length;
-  console.log(difEndDays, differenceDays);
 
   const ensureNonNegative = (num) => {
     return num < 0 ? 0 : num;
