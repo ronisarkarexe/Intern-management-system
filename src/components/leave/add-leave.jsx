@@ -11,7 +11,7 @@ const { Option } = Select;
 const AddLeave = () => {
   const [departments, setDepartments] = useState([]);
   const [interns, setInterns] = useState([]);
-  const { data } = useGetAllDepartmentsQuery(undefined);
+  const { data, isLoading } = useGetAllDepartmentsQuery(undefined);
   const { data: internData } = useGetAllInternsQuery();
   const [form] = Form.useForm();
   const [createLeave] = useCreateLeaveMutation();
@@ -20,7 +20,6 @@ const AddLeave = () => {
       setInterns(internData.data.data);
     }
   }, [internData]);
-
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setDepartments(data.data.data);
@@ -44,6 +43,10 @@ const AddLeave = () => {
     }
     form.resetFields();
   };
+
+  if (isLoading) {
+    return <div>Loading...!</div>;
+  }
 
   return (
     <div className="m-4" style={{ width: "60%" }}>

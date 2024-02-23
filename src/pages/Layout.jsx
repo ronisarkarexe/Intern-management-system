@@ -1,13 +1,14 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { deleteAccessTokenFromState } from "../redux/features/auth/authSlice";
 import { Button } from "antd";
+import { useGetProfileInfoQuery } from "../redux/features/profile/profileApi";
 
 const Layout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const { data } = useGetProfileInfoQuery();
 
   const handelLogOut = () => {
     localStorage.removeItem("accessToken");
@@ -34,7 +35,7 @@ const Layout = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu p-4 pb-1 w-80 min-h-full bg-base-200 text-base-content">
-          {user?.user?.role === "ADMIN" && (
+          {data?.data?.role === "ADMIN" && (
             <>
               <li>
                 <Link to="/">
@@ -49,11 +50,6 @@ const Layout = () => {
               <li>
                 <Link to="/admin">
                   <a>Admin</a>
-                </Link>
-              </li>
-              <li>
-                <Link to="/salary">
-                  <a>Salary</a>
                 </Link>
               </li>
               <li>
@@ -79,11 +75,16 @@ const Layout = () => {
             </Link>
           </li>
           <li>
+            <Link to="/salary">
+              <a>Salary</a>
+            </Link>
+          </li>
+          <li>
             <Link to="/leave">
               <a>Leave</a>
             </Link>
           </li>
-          {user?.user?.isInternshipCompleted && (
+          {data?.data?.isInternshipCompleted && (
             <li>
               <Link to="/generate-certificate">
                 <a>Generate Certificate</a>

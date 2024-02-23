@@ -5,10 +5,12 @@ import {
   useGetAllEventsQuery,
 } from "../../redux/features/event/eventApi";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
+import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
 
 const ViewListComponent = () => {
   const [events, setEvents] = useState([]);
   const { data, isLoading } = useGetAllEventsQuery();
+  const { data: user } = useGetProfileInfoQuery();
   const [deleteEvent] = useDeleteEventMutation();
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
@@ -58,8 +60,27 @@ const ViewListComponent = () => {
       title: "Poster",
       dataIndex: "eventImage",
     },
+    // {
+    //   title: "Action",
+    //   dataIndex: "",
+    //   key: "x",
+    //   render: (record) => (
+    //     <DeleteConfirmation
+    //       id={record._id}
+    //       title="Delete the admin"
+    //       description="Are you sure to delete this admin?"
+    //       onConfirm={handleDelete}
+    //     >
+    //       <Button danger size="small">
+    //         Delete
+    //       </Button>
+    //     </DeleteConfirmation>
+    //   ),
+    // },
+  ];
 
-    {
+  if (user?.data?.role === "ADMIN") {
+    columns.push({
       title: "Action",
       dataIndex: "",
       key: "x",
@@ -75,11 +96,13 @@ const ViewListComponent = () => {
           </Button>
         </DeleteConfirmation>
       ),
-    },
-  ];
+    });
+  }
+
   if (isLoading) {
     return <div>Loading...!</div>;
   }
+
   return (
     <div className="m-4">
       <h3 className="text-xl">Event Lists</h3>

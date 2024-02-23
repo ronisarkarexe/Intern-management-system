@@ -18,7 +18,7 @@ const api = createApi({
     "DeleteSalary",
     "CreateTask",
     "DeleteTask",
-    "CreateLeave",
+    "CreateLeaveApi",
     "DeleteLeave",
     "CreateCertificate",
     "DeleteCertificate",

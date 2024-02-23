@@ -10,7 +10,7 @@ const ViewListComponent = () => {
   const [leaves, setLeaves] = useState([]);
   const { data, isLoading } = useGetAllLeaveQuery();
   const [deleteLeave] = useDeleteLeaveMutation();
-  
+
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setLeaves(data.data.data);
@@ -76,7 +76,13 @@ const ViewListComponent = () => {
           description="Are you sure to delete this admin?"
           onConfirm={handleDelete}
         >
-          <Button danger size="small">
+          <Button
+            danger
+            size="small"
+            disabled={
+              record.status === "Approved" || record.status === "Rejected"
+            }
+          >
             Delete
           </Button>
         </DeleteConfirmation>
