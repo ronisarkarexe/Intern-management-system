@@ -11,7 +11,7 @@ import {
   Select,
   Space,
 } from "antd";
-import moment from "moment";
+// import moment from "moment";
 import { useGetAllDepartmentsQuery } from "../../redux/features/department/departmentApi";
 import { useCreateInternMutation } from "../../redux/features/intern/internApi";
 import { ToastContainer, toast } from "react-toastify";
@@ -40,14 +40,14 @@ const AdminListComponent = () => {
   };
 
   const onFinish = async (values) => {
-    const formattedValues = {
-      ...values,
-      joinDate: moment(values.joinDate).format("YYYY-MM-DD"),
-      endDate: moment(values.endDate).format("YYYY-MM-DD"),
-    };
-    const res = await createIntern(formattedValues);
+    // const formattedValues = {
+    //   ...values,
+    //   joinDate: moment(values.joinDate).format("YYYY-MM-DD"),
+    //   endDate: moment(values.endDate).format("YYYY-MM-DD"),
+    // };
+    const res = await createIntern(values);
     if (res) {
-      toast(`Admin created successfully.!`, {
+      toast(`Intern created successfully.!`, {
         autoClose: 1000,
         theme: "light",
         type: "success",

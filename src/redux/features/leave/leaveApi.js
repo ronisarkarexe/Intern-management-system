@@ -10,7 +10,7 @@ const leaveApi = api.injectEndpoints({
           authorization: token,
         },
       }),
-      providesTags: ["CreateLeave", "DeleteLeave"],
+      providesTags: ["CreateLeaveApi", "DeleteLeave", "UpdateLeaveApi"],
     }),
     createLeave: build.mutation({
       query: (data) => ({
@@ -21,7 +21,7 @@ const leaveApi = api.injectEndpoints({
           authorization: token,
         },
       }),
-      invalidatesTags: ["CreateLeave"],
+      invalidatesTags: ["CreateLeaveApi"],
     }),
     deleteLeave: build.mutation({
       query: (id) => ({
@@ -33,11 +33,23 @@ const leaveApi = api.injectEndpoints({
       }),
       invalidatesTags: ["DeleteLeave"],
     }),
+    updateLeave: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/intern-leave/${id}`,
+        method: "PATCH",
+        body: data,
+        headers: {
+          Authorization: token,
+        },
+      }),
+      invalidatesTags: ["UpdateLeaveApi"],
+    }),
   }),
 });
 
 export const {
   useGetAllLeaveQuery,
   useCreateLeaveMutation,
-  useDeleteLeaveMutation
+  useDeleteLeaveMutation,
+  useUpdateLeaveMutation,
 } = leaveApi;

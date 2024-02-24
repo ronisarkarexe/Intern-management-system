@@ -10,6 +10,7 @@ const profileApi = api.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["UpdateTaskStatus"],
     }),
   }),
 });

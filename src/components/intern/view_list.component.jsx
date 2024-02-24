@@ -5,17 +5,24 @@ import {
 } from "../../redux/features/intern/internApi";
 import { Button, Table, message } from "antd";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/features/profile/profileSlice";
+import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
+import LoadingComponent from "../../shared-ui/loading";
 
 const ViewListComponent = () => {
   const [interns, setInterns] = useState([]);
   const { data, isLoading } = useGetAllInternsQuery();
+  const { data: user } = useGetProfileInfoQuery();
   const [deleteIntern] = useDeleteInternMutation();
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setInterns(data.data.data);
     }
   }, [data]);
+
+  dispatch(addUser(interns));
 
   const handleDelete = async (id) => {
     try {
@@ -27,7 +34,7 @@ const ViewListComponent = () => {
       message.error("An error occurred while deleting department");
     }
   };
-
+  
   const columns = [
     {
       title: "Index",
@@ -71,7 +78,27 @@ const ViewListComponent = () => {
       title: "Collage Name",
       dataIndex: "collageName",
     },
-    {
+    // {
+    //   title: "Action",
+    //   dataIndex: "",
+    //   key: "x",
+    //   render: (record) => (
+    //     <DeleteConfirmation
+    //       id={record._id}
+    //       title="Delete the admin"
+    //       description="Are you sure to delete this admin?"
+    //       onConfirm={handleDelete}
+    //     >
+    //       <Button danger size="small">
+    //         Delete
+    //       </Button>
+    //     </DeleteConfirmation>
+    //   ),
+    // },
+  ];
+
+  if (user?.data?.role === "ADMIN") {
+    columns.push({
       title: "Action",
       dataIndex: "",
       key: "x",
@@ -87,11 +114,11 @@ const ViewListComponent = () => {
           </Button>
         </DeleteConfirmation>
       ),
-    },
-  ];
+    });
+  }
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   return (

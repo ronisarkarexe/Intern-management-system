@@ -6,12 +6,13 @@ import { useGetAllDepartmentsQuery } from "../../redux/features/department/depar
 import { useGetAllInternsQuery } from "../../redux/features/intern/internApi";
 import moment from "moment";
 import { useCreateLeaveMutation } from "../../redux/features/leave/leaveApi";
+import LoadingComponent from "../../shared-ui/loading";
 const { Option } = Select;
 
 const AddLeave = () => {
   const [departments, setDepartments] = useState([]);
   const [interns, setInterns] = useState([]);
-  const { data } = useGetAllDepartmentsQuery(undefined);
+  const { data, isLoading } = useGetAllDepartmentsQuery(undefined);
   const { data: internData } = useGetAllInternsQuery();
   const [form] = Form.useForm();
   const [createLeave] = useCreateLeaveMutation();
@@ -20,7 +21,6 @@ const AddLeave = () => {
       setInterns(internData.data.data);
     }
   }, [internData]);
-
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setDepartments(data.data.data);
@@ -34,7 +34,7 @@ const AddLeave = () => {
       endDate: moment(values.endDate).format("YYYY-MM-DD"),
       appliedDate: moment(values.appliedDate).format("YYYY-MM-DD"),
     };
-    const res = await createLeave(formattedValues);
+    const res = await createLeave(values);
     if (res) {
       toast(`Leave added successfully.!`, {
         autoClose: 1000,
@@ -44,6 +44,10 @@ const AddLeave = () => {
     }
     form.resetFields();
   };
+
+  if (isLoading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <div className="m-4" style={{ width: "60%" }}>
@@ -148,7 +152,7 @@ const AddLeave = () => {
               />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          {/* <Col span={12}>
             <Form.Item
               name="appliedDate"
               label="Applied Date"
@@ -167,7 +171,7 @@ const AddLeave = () => {
                 getPopupContainer={(trigger) => trigger.parentElement}
               />
             </Form.Item>
-          </Col>
+          </Col> */}
         </Row>
         <Button
           type="primary"

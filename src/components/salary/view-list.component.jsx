@@ -1,20 +1,37 @@
 import { useEffect, useState } from "react";
-import { Button, Table, message } from "antd";
+import { Button, Select, Table, message } from "antd";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
 import {
   useDeleteSalaryMutation,
   useGetAllSalaryQuery,
+  useUpdateSalaryMutation,
 } from "../../redux/features/salary/salaryApi";
+import LoadingComponent from "../../shared-ui/loading";
 
+const { Option } = Select;
 const ViewListComponent = () => {
   const [salaries, setSalaries] = useState([]);
   const { data, isLoading } = useGetAllSalaryQuery();
   const [deleteSalary] = useDeleteSalaryMutation();
+  const [updateSalary] = useUpdateSalaryMutation();
+
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
       setSalaries(data.data.data);
     }
   }, [data]);
+
+  const handleStatusChange = async (id, value) => {
+    const newData = {
+      status: value,
+    };
+    const res = await updateSalary({ id, data: newData });
+    if (res.data) {
+      message.success("Salary updated successfully!");
+    } else {
+      message.error("Salary can not updated successfully!");
+    }
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -55,6 +72,16 @@ const ViewListComponent = () => {
     {
       title: "Status",
       dataIndex: "status",
+      render: (status, record) => (
+        <Select
+          defaultValue={status}
+          onChange={(value) => handleStatusChange(record._id, value)}
+        >
+          <Option value="PENDING">Pending</Option>
+          <Option value="ONGOING">Ongoing</Option>
+          <Option value="DONE">Done</Option>
+        </Select>
+      ),
     },
     {
       title: "Month",
@@ -80,7 +107,7 @@ const ViewListComponent = () => {
   ];
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
   return (
     <div className="m-4">

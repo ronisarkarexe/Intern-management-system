@@ -10,7 +10,7 @@ const taskApi = api.injectEndpoints({
           Authorization: token,
         },
       }),
-      providesTags: ["CreateTask", "DeleteTask"],
+      providesTags: ["CreateTask", "DeleteTask", "UpdateTaskStatus"],
     }),
     createTask: build.mutation({
       query: (data) => ({
@@ -33,6 +33,17 @@ const taskApi = api.injectEndpoints({
       }),
       invalidatesTags: ["DeleteTask"],
     }),
+    updateTaskStatus: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/task/${id}`,
+        method: "PATCH",
+        body: data,
+        headers: {
+          Authorization: token,
+        },
+      }),
+      invalidatesTags: ["UpdateTaskStatus"],
+    }),
   }),
 });
 
@@ -40,4 +51,5 @@ export const {
   useGetAllTaskQuery,
   useCreateTaskMutation,
   useDeleteTaskMutation,
+  useUpdateTaskStatusMutation,
 } = taskApi;

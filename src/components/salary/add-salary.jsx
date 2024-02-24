@@ -10,7 +10,7 @@ const { Option } = Select;
 const AddSalary = () => {
   const [departments, setDepartments] = useState([]);
   const [interns, setInterns] = useState([]);
-  const { data, isLoading } = useGetAllDepartmentsQuery(undefined);
+  const { data } = useGetAllDepartmentsQuery(undefined);
   const { data: internData } = useGetAllInternsQuery();
   const [createSalary] = useCreateSalaryMutation();
   const [form] = Form.useForm();
@@ -33,19 +33,21 @@ const AddSalary = () => {
       status: "PENDING",
     };
     const res = await createSalary(newValues);
-    if (res) {
+    if (res?.data) {
       toast(`Salary added successfully.!`, {
         autoClose: 1000,
         theme: "light",
         type: "success",
       });
+    } else {
+      toast(res?.error?.data?.message, {
+        autoClose: 1000,
+        theme: "light",
+        type: "error",
+      });
     }
     form.resetFields();
   };
-
-  if (isLoading) {
-    return <div>Loading...!</div>;
-  }
 
   return (
     <div className="m-4" style={{ width: "60%" }}>

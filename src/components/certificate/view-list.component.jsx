@@ -5,6 +5,7 @@ import {
   useGetAllCertificatesQuery,
 } from "../../redux/features/certificate/certificateApi";
 import { useEffect, useState } from "react";
+import LoadingComponent from "../../shared-ui/loading";
 
 const ViewListComponent = () => {
   const [certificates, setCertificates] = useState([]);
@@ -76,7 +77,7 @@ const ViewListComponent = () => {
   ];
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <LoadingComponent />;
   }
 
   return (

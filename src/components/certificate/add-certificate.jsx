@@ -33,7 +33,7 @@ const AddCertificate = () => {
       ...values,
       issueDate: moment(values.issueDate).format("YYYY-MM-DD"),
     };
-    const res = await createCertificate(formattedValues);
+    const res = await createCertificate(values);
     if (res) {
       toast(`Certificate added successfully.!`, {
         autoClose: 1000,

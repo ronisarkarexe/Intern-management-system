@@ -5,10 +5,13 @@ import {
   useGetAllEventsQuery,
 } from "../../redux/features/event/eventApi";
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
+import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
+import LoadingComponent from "../../shared-ui/loading";
 
 const ViewListComponent = () => {
   const [events, setEvents] = useState([]);
   const { data, isLoading } = useGetAllEventsQuery();
+  const { data: user } = useGetProfileInfoQuery();
   const [deleteEvent] = useDeleteEventMutation();
   useEffect(() => {
     if (data && Array.isArray(data.data.data)) {
@@ -52,14 +55,47 @@ const ViewListComponent = () => {
     },
     {
       title: "Status",
-      dataIndex: "eventImage",
+      dataIndex: "",
+      key: "status",
+      render: (record) => {
+        const currentDate = new Date();
+        const startDate = new Date(record.startDate);
+        const endDate = new Date(record.endDate);
+
+        if (endDate < currentDate) {
+          return "Inactive";
+        } else if (startDate <= currentDate && endDate >= currentDate) {
+          return "Ongoing";
+        } else if (startDate > currentDate) {
+          return "Upcoming";
+        }
+      },
     },
     {
       title: "Poster",
       dataIndex: "eventImage",
     },
+    // {
+    //   title: "Action",
+    //   dataIndex: "",
+    //   key: "x",
+    //   render: (record) => (
+    //     <DeleteConfirmation
+    //       id={record._id}
+    //       title="Delete the admin"
+    //       description="Are you sure to delete this admin?"
+    //       onConfirm={handleDelete}
+    //     >
+    //       <Button danger size="small">
+    //         Delete
+    //       </Button>
+    //     </DeleteConfirmation>
+    //   ),
+    // },
+  ];
 
-    {
+  if (user?.data?.role === "ADMIN") {
+    columns.push({
       title: "Action",
       dataIndex: "",
       key: "x",
@@ -75,11 +111,13 @@ const ViewListComponent = () => {
           </Button>
         </DeleteConfirmation>
       ),
-    },
-  ];
-  if (isLoading) {
-    return <div>Loading...!</div>;
+    });
   }
+
+  if (isLoading) {
+    return <LoadingComponent/>;
+  }
+
   return (
     <div className="m-4">
       <h3 className="text-xl">Event Lists</h3>
