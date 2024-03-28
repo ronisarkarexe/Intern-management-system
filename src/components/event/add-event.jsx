@@ -1,7 +1,6 @@
 import { Button, Col, DatePicker, Form, Input, Row } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import moment from "moment";
 import { useCreateEventMutation } from "../../redux/features/event/eventApi";
 
 const AddEventComponent = () => {

@@ -34,7 +34,7 @@ const ViewListComponent = () => {
       message.error("An error occurred while deleting department");
     }
   };
-  
+  // form columns
   const columns = [
     {
       title: "Index",

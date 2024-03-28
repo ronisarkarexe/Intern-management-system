@@ -40,11 +40,6 @@ const AdminListComponent = () => {
   };
 
   const onFinish = async (values) => {
-    // const formattedValues = {
-    //   ...values,
-    //   joinDate: moment(values.joinDate).format("YYYY-MM-DD"),
-    //   endDate: moment(values.endDate).format("YYYY-MM-DD"),
-    // };
     const res = await createIntern(values);
     if (res) {
       toast(`Intern created successfully.!`, {
