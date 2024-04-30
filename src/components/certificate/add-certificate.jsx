@@ -4,8 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useGetAllDepartmentsQuery } from "../../redux/features/department/departmentApi";
 import { useGetAllInternsQuery } from "../../redux/features/intern/internApi";
-import moment from "moment";
 import { useCreateCertificateMutation } from "../../redux/features/certificate/certificateApi";
+import LoadingComponent from "../../shared-ui/loading";
 const { Option } = Select;
 
 const AddCertificate = () => {
@@ -29,10 +29,6 @@ const AddCertificate = () => {
   }, [data]);
 
   const onFinish = async (values) => {
-    const formattedValues = {
-      ...values,
-      issueDate: moment(values.issueDate).format("YYYY-MM-DD"),
-    };
     const res = await createCertificate(values);
     if (res) {
       toast(`Certificate added successfully.!`, {
@@ -45,7 +41,9 @@ const AddCertificate = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...!</div>;
+    return <div>
+      <LoadingComponent />
+    </div>;
   }
 
   return (
