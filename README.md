@@ -1,3 +1,6 @@
+### Server side: https://github.com/ronisarkarexe/Intern-management-system-server
+
+
 # Intern Management System
 
 The Intern Management System aims to offer organizations an efficient platform to create, store, and manage intern records. The system is equipped with features to manage intern tasks, events, leave, and salary management, making it easier for organizations to maintain intern details. This application serves as a valuable tool for the department responsible for managing intern-related data in an organization.
