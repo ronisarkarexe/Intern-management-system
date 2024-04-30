@@ -6,6 +6,7 @@ import {
 } from "../../redux/features/certificate/certificateApi";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../../shared-ui/loading";
+import { getLocalTime } from "../../utils/time-convert";
 
 const ViewListComponent = () => {
   const [certificates, setCertificates] = useState([]);
@@ -52,6 +53,7 @@ const ViewListComponent = () => {
     {
       title: "Issue Date",
       dataIndex: "issueDate",
+      render: (issueDate) => getLocalTime(issueDate),
     },
     {
       title: "Certificate Image",

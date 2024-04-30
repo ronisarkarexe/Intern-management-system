@@ -6,6 +6,7 @@ import { useUpdateTaskStatusMutation } from "../../redux/features/task/taskApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StrokeTextIcon from "../../shared-ui/stroke-text-icon";
+import { message } from "antd";
 
 const InternTaskInProgressList = ({ data, handelStatusChange }) => {
   const [reason, setReason] = useState("");
@@ -30,18 +31,20 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
     const res = await updateTaskStatus({ id: taskId, data: newData });
     if (res.data) {
       setReason("");
-      toast(`Applied extended date successfully!`, {
-        autoClose: 2000,
-        theme: "light",
-        type: "success",
-      });
+      message.success("Applied extended date successfully!");
+      // toast(`Applied extended date successfully!`, {
+      //   autoClose: 2000,
+      //   theme: "light",
+      //   type: "success",
+      // });
       setIsModalOpen(false);
     } else {
-      toast(`Failed to extended date!`, {
-        autoClose: 2000,
-        theme: "light",
-        type: "error",
-      });
+      message.error("Failed to extended date!");
+      // toast(`Failed to extended date!`, {
+      //   autoClose: 2000,
+      //   theme: "light",
+      //   type: "error",
+      // });
     }
   };
 
@@ -61,9 +64,9 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
                   <th>Task Name</th>
                   <th>Assign Date</th>
                   <th>Deadline</th>
+                  <th>New Deadline</th>
                   <th>Statue</th>
                   <th>Extend Deadline</th>
-                  <th>New Deadline</th>
                 </tr>
               </thead>
               <tbody>
@@ -79,6 +82,7 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
                     >
                       {task.taskId.deadlineDate}
                     </td>
+                    <td>{task.taskId.extendedDate}</td>
                     <td>
                       <select
                         className="select select-bordered select-sm"
@@ -102,7 +106,6 @@ const InternTaskInProgressList = ({ data, handelStatusChange }) => {
                         <StrokeTextIcon title="Already applied!" />
                       )}
                     </td>
-                    <td>{task.taskId.extendedDate}</td>
                   </tr>
                 ))}
               </tbody>

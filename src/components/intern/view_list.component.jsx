@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/features/profile/profileSlice";
 import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
 import LoadingComponent from "../../shared-ui/loading";
+import { getLocalTime } from "../../utils/time-convert";
 
 const ViewListComponent = () => {
   const [interns, setInterns] = useState([]);
@@ -61,10 +62,12 @@ const ViewListComponent = () => {
     {
       title: "Join Date",
       dataIndex: "joinDate",
+      render: (joinDate) => getLocalTime(joinDate),
     },
     {
       title: "End Date",
       dataIndex: "endDate",
+      render: (endDate) => getLocalTime(endDate),
     },
     {
       title: "Contact",

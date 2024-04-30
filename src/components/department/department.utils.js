@@ -7,5 +7,5 @@ export const options = [
   { value: "App Development", label: "App Development" },
   { value: "Marketing", label: "Marketing" },
   { value: "Crypto", label: "Crypto" },
-  { value: "Cuber Security", label: "Cuber Security" },
+  { value: "Cuber Security", label: "Cyber Security" },
 ];

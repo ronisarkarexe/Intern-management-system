@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import LoadingComponent from "../../shared-ui/loading";
+import { getLocalTime } from "../../utils/time-convert";
 
 const ViewListComponent = () => {
   const [tasks, setTasks] = useState([]);
@@ -58,20 +59,22 @@ const ViewListComponent = () => {
     };
     const res = await updateTaskStatus({
       id: taskId,
-      data: selectedDate.extendedDate,
+      data: formattedValues,
     });
     if (res?.data) {
-      toast(`Extended date successfully.!`, {
-        autoClose: 1000,
-        theme: "light",
-        type: "success",
-      });
+      message.success("Extended date successfully.!")
+      // toast(`Extended date successfully.!`, {
+      //   autoClose: 1000,
+      //   theme: "light",
+      //   type: "success",
+      // });
     } else {
-      toast(`Failed to extend date.!`, {
-        autoClose: 1000,
-        theme: "light",
-        type: "error",
-      });
+      message.success("Failed to extend date.!")
+      // toast(`Failed to extend date.!`, {
+      //   autoClose: 1000,
+      //   theme: "light",
+      //   type: "error",
+      // });
     }
     setIsModalOpen(false);
   };
@@ -104,10 +107,12 @@ const ViewListComponent = () => {
     {
       title: "Assign Date",
       dataIndex: "assignDate",
+      render: (assignDate) => getLocalTime(assignDate),
     },
     {
       title: "Deadline Date",
       dataIndex: "deadlineDate",
+      render: (deadlineDate) => getLocalTime(deadlineDate),
     },
     {
       title: "Action",
@@ -178,7 +183,7 @@ const ViewListComponent = () => {
             style={{ outline: "none" }}
             value={reason}
           ></textarea>
-          <h1>Previous dateline for task: {dateline}</h1>
+          <h1>Previous dateline for task: {getLocalTime(dateline)}</h1>
           <Form
             layout="vertical"
             form={form}
