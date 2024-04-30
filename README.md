@@ -5,7 +5,7 @@ The system comprises two main panels: the Intern Panel and the Admin Panel. The 
 
 ## Intern Panel:-
 
-1. Intern Profile (Intern can update own profile information).
+1. Intern Profile (Intern can view own profile information).
 2. Intern Details(Intern Name, Address, Contact no , Date of Joining, Date of ending, Date of Completion Internship, College, city, Department)
 3. Task report ( when task assign then it show intern task todo list, intern when start task then, make this in progress, after complited make status done)
 4. Leave application form(Department, Reason for leave, no of day you want to leave, Submit)
