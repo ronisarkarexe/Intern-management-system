@@ -8,6 +8,7 @@ import {
 } from "../../redux/features/leave/leaveApi";
 import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
 import LoadingComponent from "../../shared-ui/loading";
+import { getLocalTime } from "../../utils/time-convert";
 const { Option } = Select;
 
 const ViewListComponent = () => {
@@ -83,14 +84,17 @@ const ViewListComponent = () => {
     {
       title: "Start Date",
       dataIndex: "startDate",
+      render: (startDate) => getLocalTime(startDate),
     },
     {
       title: "End Date",
       dataIndex: "endDate",
+      render: (endDate) => getLocalTime(endDate),
     },
     {
       title: "Applied Date",
       dataIndex: "createdAt",
+      render: (createdAt) => getLocalTime(createdAt),
     },
     {
       title: "Action",

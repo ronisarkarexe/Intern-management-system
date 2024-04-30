@@ -7,6 +7,7 @@ import {
 import DeleteConfirmation from "../../shared-ui/delete_confirmation";
 import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
 import LoadingComponent from "../../shared-ui/loading";
+import { getLocalTime } from "../../utils/time-convert";
 
 const ViewListComponent = () => {
   const [events, setEvents] = useState([]);
@@ -36,22 +37,27 @@ const ViewListComponent = () => {
       dataIndex: "",
       key: "index",
       render: (text, record, index) => index + 1,
+      width: "5%",
     },
     {
       title: "Event Name",
       dataIndex: "eventName",
+      width: "10%",
     },
     {
       title: "Registration Link",
       dataIndex: "registrationLink",
+      width: "10%",
     },
     {
       title: "Start Date",
       dataIndex: "startDate",
+      render: (startDate) => getLocalTime(startDate),
     },
     {
       title: "End Date",
       dataIndex: "endDate",
+      render: (endDate) => getLocalTime(endDate),
     },
     {
       title: "Status",
@@ -63,7 +69,7 @@ const ViewListComponent = () => {
         const endDate = new Date(record.endDate);
 
         if (endDate < currentDate) {
-          return "Inactive";
+          return "In-Active";
         } else if (startDate <= currentDate && endDate >= currentDate) {
           return "Ongoing";
         } else if (startDate > currentDate) {
@@ -115,7 +121,7 @@ const ViewListComponent = () => {
   }
 
   if (isLoading) {
-    return <LoadingComponent/>;
+    return <LoadingComponent />;
   }
 
   return (

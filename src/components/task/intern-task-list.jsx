@@ -1,9 +1,10 @@
+import { message } from "antd";
 import { useGetProfileInfoQuery } from "../../redux/features/profile/profileApi";
 import { useUpdateTaskStatusMutation } from "../../redux/features/task/taskApi";
 import InternTaskDoneList from "./intern-task-done-list";
 import InternTaskInProgressList from "./intern-task-in-progress-list";
 import TaskTodoList from "./intern-task-todo-list";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const InternTaskList = () => {
@@ -16,17 +17,19 @@ const InternTaskList = () => {
     };
     const res = await updateTaskStatus({ id: taskId, data: changeStatus });
     if (res.data) {
-      toast(`Task status change to ${e.target.value}`, {
-        autoClose: 2000,
-        theme: "light",
-        type: "success",
-      });
+      message.success(`Task status change to ${e.target.value}`);
+      // toast(`Task status change to ${e.target.value}`, {
+      //   autoClose: 2000,
+      //   theme: "light",
+      //   type: "success",
+      // });
     } else {
-      toast(`Failed to change status change to ${e.target.value}`, {
-        autoClose: 2000,
-        theme: "light",
-        type: "error",
-      });
+      message.error(`Failed to change status change to ${e.target.value}`);
+      // toast(`Failed to change status change to ${e.target.value}`, {
+      //   autoClose: 2000,
+      //   theme: "light",
+      //   type: "error",
+      // });
     }
   };
   return (
